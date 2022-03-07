@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{% static 'IMAGES/logo.png' %}" type="images/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/app.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/compenents.css' %}">
+    {% if title %}
+        <title>SAFETY-{{title}}</title>
+    {% endif %}
+</head>
+<body>
+    <div class="app_home_page">
+        <div class="app_border"></div>
+        <div class="app_home_settings">
+            <a style="text-decoration: none;" href="{% url 'safety-app' %}">
+                <div class="app_settings_dashboard">
+                    <img style="width: 20px;margin-right: 15px;" src="{% static 'LOGO/rom.png' %}">
+                    <div class="app_dashboard_info">
+                        Dashboard Access
+                    </div>
+                </div>
+            </a>
+            <a style="text-decoration: none;" href="{% url 'safety-compenents' %}">
+                <div class="app_settings_components">
+                    <img style="width: 20px;margin-right: 15px;" src="{% static 'LOGO/web.png' %}">
+                    <div class="app_compenents_info">
+                        System Compenents
+                    </div>
+                </div>
+            </a>    
+            <div class="app_settings_layout">
+                <img style="width: 20px;margin-right: 15px;" src="{% static 'LOGO/dashboard.png' %}">
+                <div class="app_layout_info">
+                    Layout Layers
+                </div>
+            </div>
+            <div class="app_settings_accounts">
+                <img style="width: 20px;margin-right: 15px;" src="{% static 'LOGO/user.png' %}">
+                <div class="app_accounts_info">
+                    Manage Accounts
+                </div>
+            </div>
+        </div>
+        <div class="app_home_content">
+            <div class="app_content_header">
+                <div class="app_header_img">
+                    <img src="{% static 'IMAGES/design.png' %}">
+                </div>
+                <div class="app_header_setting">
+                    <img style="width: 24px; height: 24px;" src="{% static 'IMAGES/notification.png' %}">
+                    <img style="width: 24px; height: 24px;" src="{% static 'IMAGES/settings.png' %}">
+                    <img src="{% static 'IMAGES/account.png' %}">
+                </div>
+            </div>
+
+
+
+
+            <!-- Here our application start -->
+                {% block content %}
+                {% endblock content%}
+            <!-- Here our application end -->
+
+
+
+
+            <div class="app_content_footer">
+                <div class="app_footer_img">
+                    <img src="{% static 'IMAGES/design.png' %}">
+                </div>
+                <div class="app_footer_name">
+                    Made by <p style="color: #0e7490; margin-left: 10px;"> EST &copy; Essaouira</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'JS/script.js' %}"></script>
+</body>
+</html>

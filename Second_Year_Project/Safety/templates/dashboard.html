@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="dashboard_page">
+    <div class="dashboard_title">
+        Dashboard
+    </div>
+    <div class="dash_board_data">
+        <div class="data_total">
+            <div class="data_total_info">
+                <div class="data_total_value">TOTAL PERSON DETECTED</div>
+                <div class="data_total_amount"><h6> 354351P</h6></div>
+            </div>
+            <img src="{% static 'IMAGES/user.png' %}">
+        </div>
+        <div class="data_normal">
+            <div class="data_total_info">
+                <div class="data_total_value">TOTAL NORMAL DETECTED</div>
+                <div class="data_total_amount"><h6 style="color: rgb(30, 194, 30);"> P</h6></div>
+            </div>
+            <img src="{% static 'IMAGES/people.png' %}">
+        </div>
+        <div class="data_intrue">
+            <div class="data_total_info">
+                <div class="data_total_value">TOTAL INTRUE DETECTED</div>
+                <div class="data_total_amount"><h6 style="color: rgb(255, 35, 35);"> P</h6></div>
+            </div>
+            <img src="{% static 'IMAGES/target.png' %}">
+        </div>
+        <div class="data_average">
+            <div class="data_total_info">
+                <div class="data_total_value">TOTAL AVERAGE PEOPLE</div>
+                <div class="data_total_amount"><h6 style="color: rgb(0, 0, 0);">  %</h6></div>
+            </div>
+            <img src="{% static 'IMAGES/average.png' %}">
+        </div>
+    </div>
+    <div class="dashboard_graph">
+        <div class="plot_graph">
+            <img src="{% static 'EXCEL/plot.png' %}">
+        </div>
+        <div class="pie_graph">
+            <img style="width: 350px; height: 350px;" src="{% static 'EXCEL/pie.png' %}">
+        </div>
+    </div>
+</div>
+{% endblock content%}

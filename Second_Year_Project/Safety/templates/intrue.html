@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="compenents_page">
+    <div class="compenents_page_title">
+        Storage Of <p style="color : #e93e3e ;margin-left: 8px;" > Intrue Detection</p> 
+    </div>
+    <div class="compenents_page_system">
+        <h3>
+            <a href="{% url 'safety-compenents' %}">Detected Student</a>
+            <a href="{% url 'safety-intrue' %}">Detected Intrue</a>
+            <a href="{% url 'safety-new-intrue' %}">New Detected</a>
+        </h3>
+    </div>
+    <div class="compenents_page_data">
+        <div class="compenents_data_system">
+            <div class="compenents_system_header">
+                <h3><div class="system_header_name">Classification Of Intrue Detection</div></h3>
+                <div class="upload_place">
+                    <form name="submit" action="{% url 'safety-compenents' %}" method="POST">
+                        <label for="file-input"><img src="{% static 'IMAGES/upload.png' %}" style="position: absolute; right: 170px;"/></label>
+                        <input oninput="submit()" name="file" type="file" id="file-input" value="Upload file" style="visibility: hidden;"> 
+                    </form>
+                </div>
+            </div>
+            <div class="compenents_system_title">
+                <div style="margin-left: -200px;" class="system_title_name">Name</div>
+                <div style="margin-right: -250px;" class="system_title_size">Size</div>
+                <div style="margin-right: -150px;" class="system_title_type">Type</div>
+            </div>
+            <div class="compenents_system_data">
+                {% if image %}
+                    {% for i in image %}
+                        <div onclick="show_image(`{{i.url}}`)" class="system_data_all" id="system_data_all">
+                            <div class="system_data_name">
+                                <img style="width: 20px; height: 20px;" src="{% static 'IMAGES/insert-picture-icon.png' %}">
+                                {{ i.name }}
+                            </div>
+                            <div class="system_data_size">{{i.size.0}}p x {{i.size.1}}p</div>
+                            <div class="system_data_type">image/png</div>
+                        </div>   
+                    {% endfor %}
+                {% endif %} 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}

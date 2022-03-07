@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{% static 'IMAGES/logo.png' %}" type="images/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    {% if title %}
+        <title>SAFETY-{{title}}</title>
+    {% endif %}
+</head>
+<body>
+    <div class="home_login_page">
+        <div class="login_form">
+            <div class="login_form_title">
+                <h1>SAFETY</h1>
+                <img src="{% static 'IMAGES/logo.png' %}">
+            </div>
+            <div class="login_form_input">
+                <h1>Login</h1>
+            <form action="{% url 'safety-home' %}" method='POST'>
+                {% csrf_token %}
+                <input type="text" placeholder="Email Address" required><br>
+                <input type="password" placeholder="Password" required><br>
+                <a href="#">Forget Your Password ?</a><br>
+                <input type="submit" value="Login"><br>
+            </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.compenents_page{
+    border: 1px solid black;
+    height: 500px;
+    border: none;
+}
+.compenents_page_title{
+    border: 1px solid #e5e7eb;
+    height: 18%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: rgb(51, 51, 51);
+    letter-spacing: 0.05em;
+}
+.compenents_page_system{
+    border: 1px solid #e5e7eb;
+    height: 12%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.compenents_page_system a{
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    margin-left: 20px;
+    border-color: #1967D2;
+    color: white;
+    background-color: #1967D2;
+    border-width: 10px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: small;
+    transition: all 0.4s linear;
+    border-radius: 7px;
+}
+.compenents_page_system a:hover{
+    background-color: #71a7f1;
+    border-color: #71a7f1;
+    transition: all 0.4s linear;
+}
+
+.compenents_page_data{
+    border: 1px solid #e5e7eb;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+}
+.compenents_data_system{
+    border: 1px solid #d3d3d4;
+    width: 96%;
+    height: 70%;
+    border-radius: 7px;
+    box-shadow: 10px -5px 10px 5px #e5e7eb;
+}
+.compenents_system_header{
+    border: 1px solid #d3d3d4;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: none;
+}
+.compenents_system_header input{
+    background-color: #1a73e8;
+    color: white;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    transition: all 0.4s linear;
+    cursor: pointer;
+}
+.compenents_system_header input:hover{
+    background-color: #114d9b;
+    transition: all 0.4s linear;
+}
+.compenents_system_title{
+    border: 1px solid #d3d3d4;
+    height: 14%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #000000A3;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.compenents_system_data{
+    border: 1px solid black;
+    height: 64%;
+    background-color: #fff;
+    border: none;
+    overflow-y: scroll;
+    margin-top: 4px;
+    margin-left: 1px;
+}
+.system_data_all{
+    border: 1px solid black;
+    height: 26%;
+    display: flex;
+    justify-content: center;
+    border: none;
+    transition: all 0.4s linear;
+    margin-bottom: 9px;
+}
+.system_data_all:hover{
+    background-color: rgba(202, 202, 202, 0.54);
+    transition: all 0.4s linear;
+    cursor: pointer;
+}
+.system_data_name{
+    border: 1px solid black;
+    width: 58%;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: #000000DE;
+    font-size: small;
+    border: none;
+}
+.system_data_name img{
+    margin-right: 12px;
+}
+.system_data_size{
+    border: 1px solid black;
+    width: 28%;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: #0000008A;
+    font-size: small;
+    border: none;
+}
+.system_data_type{
+    border: 1px solid black;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: #0000008A;
+    font-size: small;
+    border: none;
+}
+.system_header_name{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    color: rgb(51, 51, 51);
+    margin-left: -205px;
+}
+.upload_place{
+    border: 1px solid black;
+    background-color: #1a73e8;
+    width: 13%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 7px;
+    border: none;
+    transition: all 0.4s linear;
+    margin-right: -150px;
+    height: 30px;
+}
+.upload_place:hover{
+    background-color: #114d9b;
+    transition: all 0.4s linear;
+}
+#lightbox{
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0 , .8);
+    display: none;
+}
+#lightbox.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#lightbox img{
+    border: 2px solid white;
+    border-width: 80px;
+    background-color: white;
+}
