@@ -28,3 +28,8 @@ function show_image(x){
 function submit(){ 
     document.submit.submit()
 }
+
+function show_bar(){
+    const bar = document.getElementById("account_bar_border")
+    bar.classList.toggle('active')
+}

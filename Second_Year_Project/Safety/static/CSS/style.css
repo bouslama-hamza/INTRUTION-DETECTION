@@ -52,7 +52,7 @@ body{
     color: #111827;
     border: none;
 }
-input[type=text] , input[type=password]{
+input[type=text] , input[type=password] , input[type = email]{
     padding: 13px 16px;
     margin: 13px 16px;
     width: 90%;

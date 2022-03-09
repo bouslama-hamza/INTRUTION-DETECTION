@@ -3,7 +3,7 @@
 {% block content %}
 <div class="compenents_page">
     <div class="compenents_page_title">
-        Storage Of <p style="color : #0e7490 ;margin-left: 8px;" > Student Detection</p> 
+        Storage Of <p style="color : #0e7490 ;margin-left: 8px;" > Student Detection</p> <br><br>
     </div>
     <div class="compenents_page_system">
         <h3>
@@ -12,14 +12,18 @@
             <a href="{% url 'safety-new-intrue' %}">New Detected</a>
         </h3>
     </div>
+    {% if message %}
+        <p style="color: green; margin-left: 28px; font-size: 14px; margin-top: 20px; margin-bottom: -20px; font-family: Arial, Helvetica, sans-serif;">{{message}}</p>
+    {% endif %}
     <div class="compenents_page_data">
         <div class="compenents_data_system">
             <div class="compenents_system_header">
                 <h3><div class="system_header_name">Classification Of Students Detection</div></h3>
                 <div class="upload_place">
                     <form name="submit" action="{% url 'safety-compenents' %}" method="POST">
-                        <label for="file-input"><img src="{% static 'IMAGES/upload.png' %}" style="position: absolute; right: 170px;"/></label>
-                        <input oninput="submit()" name="file" type="file" id="file-input" value="Upload file" style="visibility: hidden;"> 
+                        {% csrf_token %}
+                        <label for="file-input"><img src="{% static 'IMAGES/upload.png' %}" ></label>
+                        <input oninput="submit()" name="file" type="file" id="file-input" value="Upload file" style="visibility: hidden; position: fixed;"> 
                     </form>
                 </div>
             </div>

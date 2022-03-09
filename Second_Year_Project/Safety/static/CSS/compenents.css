@@ -44,7 +44,6 @@
     border-color: #71a7f1;
     transition: all 0.4s linear;
 }
-
 .compenents_page_data{
     border: 1px solid #e5e7eb;
     height: 70%;
@@ -168,7 +167,7 @@
     border-radius: 7px;
     border: none;
     transition: all 0.4s linear;
-    margin-right: -150px;
+    margin-right: -100px;
     height: 30px;
 }
 .upload_place:hover{

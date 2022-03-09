@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.manage_account_page{
+    border: 1px solid black;
+    height: 530px;
+    border: none;
+}
+.manage_account_title{
+    border: 2px solid #e4e4e4;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+.manage_account_title p{
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 40px;
+    color: #444444;
+}
+.manage_account_body{
+    border: 2px solid #e4e4e4;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.manage_account_input{
+    border: 1px solid black;
+    width: 40%;
+    height: 90%;
+    border: none;
+}
+.manage_account_img{
+    border: 1px solid black;
+    width: 40%;
+    height: 90%;
+    border: none;
+}
+input{
+    padding: 8px 70px 8px 70px;
+    margin: 12px 15px;
+    outline: none;
+    color: #01141a;
+}
+input[type = submit]{
+    margin-left: 120px;
+    border: none;
+    background-color: #0e7490;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    border-radius: 4px;
+    transition: all 0.3s linear;
+}
+input[type = submit]:hover{
+    background-color: #044f64;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}

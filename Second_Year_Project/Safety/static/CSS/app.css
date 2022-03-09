@@ -116,3 +116,111 @@ body{
     font-size: medium;
     color: rgb(43, 42, 42);
 }
+.account_bar{
+    position: absolute;
+    border: 1px solid black;
+    height: 200px;
+    width: 80%;
+    border: none;
+    visibility: hidden;
+}
+.account_bar_border{
+    border: 1px solid rgb(189, 189, 189);
+    height: 100%;
+    width: 19%;
+    float: right;
+    margin-right: 30px;
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: -8px 10px #e5e7eb;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s linear;
+}
+.account_bar_border.active{
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s linear;
+}
+.account_bar_img{
+    border: 1px solid black;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f3f7;
+    border: none;
+    border-radius: 7px;
+}
+.account_bar_info{
+    border: 2px solid #e5e7eb;
+    height: 30%;
+    text-align: center;
+}
+.account_bar_info h4{
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333538;
+}
+.account_bar_info h5{
+    margin-top: 5px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #6B7280;
+}
+.account_bar_set{
+    border: 1px solid black;
+    height: 33%;
+    border: none;
+    margin-top: 5px;
+    transition: all 0.3s linear;
+}
+.bar_setting{
+    border: 1px solid black;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    border: none;
+    transition: all 0.3s linear;
+}
+.bar_log_out{
+    border: 1px solid black;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    border: none;
+    transition: all 0.3s linear;
+    margin-top: 3.5px;
+}
+.account_bar_set h5{
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #6B7280;
+    margin-left: 20px;
+}
+.bar_setting:hover,
+.bar_log_out:hover{
+    background-color: #e5e7eb;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}
+.log_out_page{
+    border: 1px solid #e5e7eb;
+    width: 600px;
+    height: 23%;
+    background-color: white;
+    text-align: center;
+    margin-left: -110px;
+    border-radius: 7px;
+}
+.log_out_page h3{
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    text-align: center;
+    margin-bottom: 15px;
+}

@@ -4,6 +4,7 @@ import json
 from io import BytesIO
 from PIL import Image
 from requests import get
+import os
 
 class SimpleImage():
     
@@ -27,7 +28,7 @@ class SimpleImage():
         self.parse    = json.loads(requests.get(self.storage.get_url(self.user['idToken'])).text)
         
     def upload_image(self , path , target):
-        self.storage.child(path).upload(target)
+        self.storage.child(path+"/"+target.split("/")[3]).upload(target)
 
     def get_image(self , order):
         lest = []

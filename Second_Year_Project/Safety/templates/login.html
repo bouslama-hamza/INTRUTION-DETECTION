@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
     {% if title %}
         <title>SAFETY-{{title}}</title>
+    {% else %}
+        <title>SAFETY</title>
     {% endif %}
 </head>
 <body>
@@ -20,13 +22,16 @@
             </div>
             <div class="login_form_input">
                 <h1>Login</h1>
-            <form action="{% url 'safety-home' %}" method='POST'>
-                {% csrf_token %}
-                <input type="text" placeholder="Email Address" required><br>
-                <input type="password" placeholder="Password" required><br>
-                <a href="#">Forget Your Password ?</a><br>
-                <input type="submit" value="Login"><br>
-            </form>
+                    <form method='POST'>
+                        {% if form.errors %}
+                            <h3 style="margin-left: 55px; color: red; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">Invalid !! Please Check Your Information and Try again</h3>
+                        {% endif %}
+                        {% csrf_token %}
+                        {{ form.username }}
+                        {{ form.password }}
+                        <a href="{% url 'safety-reset-password' %}">Forget Your Password ?</a><br>
+                        <input type="submit" value="Login"><br>
+                    </form>
             </div>
         </div>
     </div>    
