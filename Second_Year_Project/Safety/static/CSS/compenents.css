@@ -110,6 +110,19 @@
     transition: all 0.4s linear;
     margin-bottom: 9px;
 }
+.system_data_all_intrue{
+    border: 1px solid black;
+    height: 26%;
+    width: 96%;
+    display: flex;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s linear;
+    margin-bottom: 9px;
+    background-color: rgb(182, 31, 31);
+    margin-left: 20px;
+    border-radius: 5px;
+}
 .system_data_all:hover{
     background-color: rgba(202, 202, 202, 0.54);
     transition: all 0.4s linear;
@@ -126,7 +139,26 @@
     font-size: small;
     border: none;
 }
+.system_data_name_intrue{
+    border: 1px solid black;
+    width: 58%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: white;
+    font-size: small;
+    border: none;
+}
+.system_data_all_intrue:hover{
+    background-color: rgb(218, 78, 78);
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
 .system_data_name img{
+    margin-right: 12px;
+}
+.system_data_name_intrue img{
     margin-right: 12px;
 }
 .system_data_size{
@@ -140,6 +172,17 @@
     font-size: small;
     border: none;
 }
+.system_data_size_intrue{
+    border: 1px solid black;
+    width: 28%;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: white;
+    font-size: small;
+    border: none;
+}
 .system_data_type{
     border: 1px solid black;
     width: 15%;
@@ -148,6 +191,17 @@
     padding-left: 30px;
     font-family: Roboto,"Helvetica Neue",sans-serif;
     color: #0000008A;
+    font-size: small;
+    border: none;
+}
+.system_data_type_intrue{
+    border: 1px solid black;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: white;
     font-size: small;
     border: none;
 }

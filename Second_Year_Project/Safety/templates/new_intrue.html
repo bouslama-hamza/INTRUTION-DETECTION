@@ -18,20 +18,21 @@
                 <h3><div class="system_header_name">Classification Of New Intrue Detection</div></h3>
             </div>
             <div class="compenents_system_title">
-                <div style="margin-left: -200px;" class="system_title_name">Name</div>
-                <div style="margin-right: -250px;" class="system_title_size">Size</div>
-                <div style="margin-right: -150px;" class="system_title_type">Type</div>
+                <div style="margin-left: -130px;" class="system_title_name">Name</div>
+                <div style="margin-right: -100px;" class="system_title_size">Size</div>
+                <div style="margin-right: -100px;" class="system_title_type">Type</div>
+                <div style="margin-right: -100px;" class="system_title_type">Submit</div>
             </div>
             <div class="compenents_system_data">
                 {% if image %}
                     {% for i in image %}
-                        <div onclick="show_image(`{{i.url}}`)" class="system_data_all" id="system_data_all">
-                            <div class="system_data_name">
-                                <img style="width: 20px; height: 20px;" src="{% static 'IMAGES/insert-picture-icon.png' %}">
+                        <div onclick="show_image(`{{i.url}}`)" class="system_data_all_intrue" id="system_data_all_intrue">
+                            <div class="system_data_name_intrue">
+                                <img style="width: 20px; height: 20px; margin-left: -220px;" src="{% static 'IMAGES/insert-picture-icon.png' %}">
                                 {{ i.name }}
                             </div>
-                            <div class="system_data_size">{{i.size.0}}p x {{i.size.1}}p</div>
-                            <div class="system_data_type">image/png</div>
+                            <div style="margin-left: -430px; margin-right: -20px;" class="system_data_size_intrue">{{i.size.0}}p x {{i.size.1}}p</div>
+                            <div class="system_data_type_intrue">image/png</div>
                         </div>   
                     {% endfor %}
                 {% endif %} 

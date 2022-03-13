@@ -4,20 +4,34 @@ from .forms import UserUpdateForm , UserLoginForm
 from django.contrib.auth.decorators import login_required
 from Safety.send_email import send_email
 from django.contrib.auth.models import User
-import os
+from Safety.make_plot_data import make_data , make_pie , make_plot
+from Safety.load_data import load_data
 
 @login_required
 def app(request):
-    return render(request , 'app.html' , {'title' : 'DashBoard'})
+    global data_set
+    try:
+        simple = SimpleImage()
+        simple.get_data_file()
+        load_data()
+    except:
+        print("no data")
+    make_pie()
+    make_plot()
+    data_set = make_data()
+    return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set})
 
 @login_required
 def compenents(request):
+    
     simple = SimpleImage()
     data = simple.get_image(['Students','Detection'])
     if request.method == 'POST':
         simple.upload_image('Into Accepted' , 'Safety/static/NewStudent/'+request.POST.get('file'))
+        simple.upload_image('Students Detection'  , 'Safety/static/NewStudent/'+request.POST.get('file'))
         message = "File Has been added Succefully , Wait For Rassbery To Be Accepted"
         return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents' , 'message' : message})
+
     return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents'})
 
 @login_required
@@ -46,14 +60,14 @@ def manage_account(request):
             return render(request , 'manage_account.html' , {'update_form':update_form , 'error':error , 'title' : 'Manage Account'})
     else:
         update_form = UserUpdateForm(instance = request.user)
-    return render(request , 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form} )
+    return render(request
+ , 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form} )
     
 def reset_password(request):
     global change_number
     global user
     if request.method == 'POST':
         email = request.POST.get('change_me')
-        print(email)
         try :
             user = User.objects.get(email = email)
             change_number = send_email()
