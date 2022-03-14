@@ -29,10 +29,7 @@ class SimpleImage():
         self.password = 'badBOY@2002'
         self.user     = self.auth.sign_in_with_email_and_password(self.email , self.password)
         self.parse    = json.loads(requests.get(self.storage.get_url(self.user['idToken'])).text)
-        if not firebase_admin._apps:
-            self.cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
-            self.admin    = firebase_admin.initialize_app(self.cred , {'storageBucket': "first-project-db261.appspot.com",} , name= 'wtf')
-            self.bucket   = admin_storage.bucket()
+        self.cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
 
     def upload_image(self , path , target):
         self.storage.child(path+"/"+target.split("/")[3]).upload(target)
@@ -48,9 +45,18 @@ class SimpleImage():
                 lest.append({'name' : i['name'].split("/")[1] , 'url' : test_url , 'size' : [width , height]})
         return lest
 
-    def get_data_file(self):
+    def get_data_file(self , bucket):
         for i in self.parse['items'] :
             if i['name'].split("/")[0] == 'Data File':
                 self.storage.child(i['name']).download(filename = 'Safety/static/DATA/'+i['name'].split("/")[1], token = os.path.basename('Safety/static/DATA/'+i['name'].split("/")[1]))
-                blob = self.bucket.blob('Data File/'+i['name'].split("/")[1])
+                blob = bucket.blob('Data File/'+i['name'].split("/")[1])
+                blob.delete()
+
+    def download_image(self,image):
+        for i in self.parse['items'] :
+            if i['name'].split("/")[0] == 'New Detection':
+                admin    = firebase_admin.initialize_app(self.cred , {'storageBucket': "first-project-db261.appspot.com",})
+                bucket   = admin_storage.bucket()
+                self.storage.child('New Detection/'+image).download(filename = 'Safety/static/TRANFER/'+image, token = os.path.basename('Safety/static/TRANFER/'+image))
+                blob = bucket.blob('New Detection/'+image)
                 blob.delete()

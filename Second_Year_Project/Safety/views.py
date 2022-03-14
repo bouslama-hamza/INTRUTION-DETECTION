@@ -6,16 +6,23 @@ from Safety.send_email import send_email
 from django.contrib.auth.models import User
 from Safety.make_plot_data import make_data , make_pie , make_plot
 from Safety.load_data import load_data
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage as admin_storage, credentials
+import os
 
 @login_required
 def app(request):
     global data_set
     try:
-        simple = SimpleImage()
-        simple.get_data_file()
+        cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
+        admin    = firebase_admin.initialize_app(cred , {'storageBucket': "first-project-db261.appspot.com",})
+        bucket   = admin_storage.bucket()
+        simple   = SimpleImage()
+        simple.get_data_file(bucket)
         load_data()
     except:
-        print("no data")
+        print("no Data")
     make_pie()
     make_plot()
     data_set = make_data()
@@ -23,7 +30,6 @@ def app(request):
 
 @login_required
 def compenents(request):
-    
     simple = SimpleImage()
     data = simple.get_image(['Students','Detection'])
     if request.method == 'POST':
@@ -31,7 +37,6 @@ def compenents(request):
         simple.upload_image('Students Detection'  , 'Safety/static/NewStudent/'+request.POST.get('file'))
         message = "File Has been added Succefully , Wait For Rassbery To Be Accepted"
         return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents' , 'message' : message})
-
     return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents'})
 
 @login_required
@@ -44,6 +49,24 @@ def intrue(request):
 def new_intrue(request):
     simple = SimpleImage()
     data = simple.get_image(['New','Detection'])
+    if request.method == 'POST':
+        if request.POST['send'] == 'Students':
+            image = request.POST['name']
+            simple = SimpleImage()
+            simple.download_image(image)
+            simple.upload_image('Into Accepted' , 'Safety/static/TRANFER/'+image)
+            simple.upload_image('Students Detection'  , 'Safety/static/TRANFER/'+image)
+            os.remove('Safety/static/TRANFER/'+image)
+            message = 'Students Has beein Classified Succesfully'
+            return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message})
+        elif request.POST['send'] == 'Intrues':
+            image = request.POST['name']
+            simple = SimpleImage()
+            simple.download_image(image)
+            simple.upload_image('Intrue Detection'  , 'Safety/static/TRANFER/'+image)
+            os.remove('Safety/static/TRANFER/'+image)
+            message = 'Students Has beein Classified Succesfully'
+            return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message})
     return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection'})
 
 @login_required
@@ -60,8 +83,7 @@ def manage_account(request):
             return render(request , 'manage_account.html' , {'update_form':update_form , 'error':error , 'title' : 'Manage Account'})
     else:
         update_form = UserUpdateForm(instance = request.user)
-    return render(request
- , 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form} )
+    return render(request, 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form} )
     
 def reset_password(request):
     global change_number

@@ -33,6 +33,18 @@
     height: 90%;
     border: none;
 }
+.manage_account_input input[type = submit]{
+    margin-left: 190px;
+    margin-top: 15px;
+    border: none;
+    background-color: #0e7490;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    border-radius: 4px;
+    transition: all 0.3s linear;
+    width: 150px;
+}
 .manage_account_img{
     border: 1px solid black;
     width: 40%;

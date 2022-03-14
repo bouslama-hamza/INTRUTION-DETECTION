@@ -12,6 +12,9 @@
             <a href="{% url 'safety-new-intrue' %}">New Detected</a>
         </h3>
     </div>
+    {% if message %}
+        <p style="color: green; margin-left: 28px; font-size: 14px; margin-top: 20px; margin-bottom: -20px; font-family: Arial, Helvetica, sans-serif;">{{message}}</p>
+    {% endif %}
     <div class="compenents_page_data">
         <div class="compenents_data_system">
             <div style="margin-left: -460px;" class="compenents_system_header">
@@ -23,21 +26,28 @@
                 <div style="margin-right: -100px;" class="system_title_type">Type</div>
                 <div style="margin-right: -100px;" class="system_title_type">Submit</div>
             </div>
-            <div class="compenents_system_data">
+            <div class="compenents_system_data_new">
                 {% if image %}
                     {% for i in image %}
-                        <div onclick="show_image(`{{i.url}}`)" class="system_data_all_intrue" id="system_data_all_intrue">
-                            <div class="system_data_name_intrue">
-                                <img style="width: 20px; height: 20px; margin-left: -220px;" src="{% static 'IMAGES/insert-picture-icon.png' %}">
+                        <div onclick="show(`{{i.url}}`)" class="system_new_all" id="system_data_all_intrue">
+                            <div class="system_new_name">
+                                <img style="width: 20px; height: 20px; margin-right: 10px;" src="{% static 'IMAGES/insert-picture-icon.png' %}">
                                 {{ i.name }}
                             </div>
-                            <div style="margin-left: -430px; margin-right: -20px;" class="system_data_size_intrue">{{i.size.0}}p x {{i.size.1}}p</div>
-                            <div class="system_data_type_intrue">image/png</div>
-                        </div>   
+                            <div class="system_data_size">{{i.size.0}}p x {{i.size.1}}p</div>
+                            <div class="system_data_type">image/png</div>
+                            <form action="{% url 'safety-new-intrue' %}" method="POST">
+                                {% csrf_token %}
+                                <input name="name" style="position: fixed; visibility: hidden;" type="text" value="{{ i.name }}">
+                                <input style="margin-right: 10px;" name="send" type="submit" value="Students">
+                                <input type="submit" name="send" value="Intrues">
+                            </form>
+                        </div>
                     {% endfor %}
                 {% endif %} 
             </div>
         </div>
     </div>
 </div>
+<script src="{% static 'JS/new_script.js' %}"></script>
 {% endblock content%}
