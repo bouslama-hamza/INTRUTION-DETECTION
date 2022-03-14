@@ -52,11 +52,9 @@ class SimpleImage():
                 blob = bucket.blob('Data File/'+i['name'].split("/")[1])
                 blob.delete()
 
-    def download_image(self,image):
+    def download_image(self,image,bucket):
         for i in self.parse['items'] :
             if i['name'].split("/")[0] == 'New Detection':
-                admin    = firebase_admin.initialize_app(self.cred , {'storageBucket': "first-project-db261.appspot.com",})
-                bucket   = admin_storage.bucket()
                 self.storage.child('New Detection/'+image).download(filename = 'Safety/static/TRANFER/'+image, token = os.path.basename('Safety/static/TRANFER/'+image))
                 blob = bucket.blob('New Detection/'+image)
                 blob.delete()

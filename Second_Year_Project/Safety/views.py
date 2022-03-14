@@ -14,6 +14,7 @@ import os
 @login_required
 def app(request):
     global data_set
+    global bucket
     try:
         cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
         admin    = firebase_admin.initialize_app(cred , {'storageBucket': "first-project-db261.appspot.com",})
@@ -53,7 +54,7 @@ def new_intrue(request):
         if request.POST['send'] == 'Students':
             image = request.POST['name']
             simple = SimpleImage()
-            simple.download_image(image)
+            simple.download_image(image , bucket)
             simple.upload_image('Into Accepted' , 'Safety/static/TRANFER/'+image)
             simple.upload_image('Students Detection'  , 'Safety/static/TRANFER/'+image)
             os.remove('Safety/static/TRANFER/'+image)
@@ -62,7 +63,7 @@ def new_intrue(request):
         elif request.POST['send'] == 'Intrues':
             image = request.POST['name']
             simple = SimpleImage()
-            simple.download_image(image)
+            simple.download_image(image , bucket)
             simple.upload_image('Intrue Detection'  , 'Safety/static/TRANFER/'+image)
             os.remove('Safety/static/TRANFER/'+image)
             message = 'Students Has beein Classified Succesfully'
