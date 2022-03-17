@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path , include
 from django.contrib.auth import views as auth_views
 from matplotlib.pyplot import title
-from Safety.forms import UserLoginForm ,ResetPassword
+from Safety.forms import UserLoginForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),

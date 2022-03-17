@@ -6,89 +6,121 @@ from Safety.send_email import send_email
 from django.contrib.auth.models import User
 from Safety.make_plot_data import make_data , make_pie , make_plot
 from Safety.load_data import load_data
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import storage as admin_storage, credentials
 import os
+
+# use our fire base class
+global simple
+simple = SimpleImage()
+global data_set
+global change_number
+global user
+global isintrue
 
 @login_required
 def app(request):
-    global data_set
-    global bucket
+    # in case there is new intrue 
+    isintrue = False
+    data = simple.get_image(['New','Detection'])
+    if data:
+        isintrue = True
     try:
-        cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
-        admin    = firebase_admin.initialize_app(cred , {'storageBucket': "first-project-db261.appspot.com",})
-        bucket   = admin_storage.bucket()
-        simple   = SimpleImage()
-        simple.get_data_file(bucket)
+        simple.get_data_file()
         load_data()
     except:
         print("no Data")
     make_pie()
     make_plot()
     data_set = make_data()
-    return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set})
+    return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'isintrue' : isintrue})
 
 @login_required
 def compenents(request):
-    simple = SimpleImage()
-    data = simple.get_image(['Students','Detection'])
-    if request.method == 'POST':
-        simple.upload_image('Into Accepted' , 'Safety/static/NewStudent/'+request.POST.get('file'))
-        simple.upload_image('Students Detection'  , 'Safety/static/NewStudent/'+request.POST.get('file'))
-        message = "File Has been added Succefully , Wait For Rassbery To Be Accepted"
-        return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents' , 'message' : message})
-    return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents'})
+    # in case there is new intrue 
+    isintrue = False
+    data = simple.get_image(['New','Detection'])
+    if data:
+        isintrue = True
+    try:
+        data = simple.get_image(['Students','Detection'])
+        if request.method == 'POST':
+            simple.upload_image('Into Accepted' , 'Safety/static/NewStudent/'+request.POST.get('file'))
+            simple.upload_image('Students Detection'  , 'Safety/static/NewStudent/'+request.POST.get('file'))
+            message = "File Has been added Succefully , Wait For Rassbery To Be Accepted"
+            return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents' , 'message' : message , 'isintrue' : isintrue})
+        return render(request , 'compenents.html' , {'image' : data , 'title' : 'Compenents' , 'isintrue' : isintrue})
+    except:
+        data_set = make_data()
+        error = 'Please Check Your Connection And Try Again'
+        return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'error' : error , 'isintrue' : isintrue})
 
 @login_required
 def intrue(request):
-    simple = SimpleImage()
-    data = simple.get_image(['Intrue','Detection'])
-    return render(request , 'intrue.html' , {'image' : data , 'title' : 'Intrue Detection'})
+    # in case there is new intrue 
+    isintrue = False
+    data = simple.get_image(['New','Detection'])
+    if data:
+        isintrue = True
+    try:
+        data = simple.get_image(['Intrue','Detection'])
+        return render(request , 'intrue.html' , {'image' : data , 'title' : 'Intrue Detection' , 'isintrue' : isintrue})
+    except:
+        data_set = make_data()
+        error = 'Please Check Your Connection And Try Again'
+        return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'error' : error , 'isintrue' : isintrue})   
 
 @login_required
 def new_intrue(request):
-    simple = SimpleImage()
-    data = simple.get_image(['New','Detection'])
-    if request.method == 'POST':
-        if request.POST['send'] == 'Students':
-            image = request.POST['name']
-            simple = SimpleImage()
-            simple.download_image(image , bucket)
-            simple.upload_image('Into Accepted' , 'Safety/static/TRANFER/'+image)
-            simple.upload_image('Students Detection'  , 'Safety/static/TRANFER/'+image)
-            os.remove('Safety/static/TRANFER/'+image)
-            message = 'Students Has beein Classified Succesfully'
-            return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message})
-        elif request.POST['send'] == 'Intrues':
-            image = request.POST['name']
-            simple = SimpleImage()
-            simple.download_image(image , bucket)
-            simple.upload_image('Intrue Detection'  , 'Safety/static/TRANFER/'+image)
-            os.remove('Safety/static/TRANFER/'+image)
-            message = 'Students Has beein Classified Succesfully'
-            return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message})
-    return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection'})
+    isintrue = False
+    try :
+        data = simple.get_image(['New','Detection'])
+        if data:
+            isintrue = True
+        if request.method == 'POST':
+            if request.POST['send'] == 'Students':
+                image = request.POST['name']
+                simple.download_image(image)
+                simple.upload_image('Into Accepted' , 'Safety/static/TRANFER/'+image)
+                simple.upload_image('Students Detection'  , 'Safety/static/TRANFER/'+image)
+                os.remove('Safety/static/TRANFER/'+image)
+                message = 'Students Has beein Classified Succesfully'
+                data = simple.get_image(['New','Detection'])
+                return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message , 'isintrue' : isintrue})
+            elif request.POST['send'] == 'Intrues':
+                image = request.POST['name']
+                simple.download_image(image)
+                simple.upload_image('Intrue Detection'  , 'Safety/static/TRANFER/'+image)
+                os.remove('Safety/static/TRANFER/'+image)
+                message = 'Students Has beein Classified Succesfully'
+                data = simple.get_image(['New','Detection'])
+                return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'message':message , 'isintrue' : isintrue})
+        return render(request , 'new_intrue.html' , {'image' : data , 'title' : 'New Intrue Detection' , 'isintrue' : isintrue})
+    except :
+        data_set = make_data()
+        error = 'Please Check Your Connection And Try Again'
+        return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'error' : error , 'isintrue' : isintrue})   
 
 @login_required
 def manage_account(request):
+    # in case there is new intrue 
+    isintrue = False
+    data = simple.get_image(['New','Detection'])
+    if data:
+        isintrue = True
     if request.method == 'POST':
         update_form = UserUpdateForm(request.POST, instance = request.user)
         if update_form.is_valid():
             request.user.set_password(update_form.cleaned_data.get('password2'))
             update_form.save()
             message = 'Setting has been Updating Successfully'
-            return render(request , 'manage_account.html' , {'update_form':update_form , 'message':message , 'title' : 'Manage Account'})
+            return render(request , 'manage_account.html' , {'update_form':update_form , 'message':message , 'title' : 'Manage Account' , 'isintrue' : isintrue})
         else:
             error = 'Invalid Information Please Try Again'
-            return render(request , 'manage_account.html' , {'update_form':update_form , 'error':error , 'title' : 'Manage Account'})
+            return render(request , 'manage_account.html' , {'update_form':update_form , 'error':error , 'title' : 'Manage Account' ,  'isintrue' : isintrue})
     else:
         update_form = UserUpdateForm(instance = request.user)
-    return render(request, 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form} )
+    return render(request, 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form , 'isintrue' : isintrue} )
     
 def reset_password(request):
-    global change_number
-    global user
     if request.method == 'POST':
         email = request.POST.get('change_me')
         try :

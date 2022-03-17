@@ -274,22 +274,23 @@
 }
 .system_new_all{
     border: 1px solid black;
-    height: 27%;
+    height: 25%;
     width: 95%;
     margin-left: 25px;
     display: flex;
     align-items: center;
-    background-color: rgb(192, 36, 36);
-    color: white;
+    background-color: #CFFAFE;
+    color: #6B7280;
     transition: all 0.2s linear;
     border-radius: 4px;
     border: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 .system_new_all:hover{
-    background-color: rgb(202, 73, 73);
+    background-color: #69f1fd;
     transition: all 0.2 linear;
+    cursor: pointer;
 }
 .system_new_name{
     border: 1px solid black;
@@ -299,7 +300,7 @@
     align-items: center;
     padding-left: 10px;
     font-family: Roboto,"Helvetica Neue",sans-serif;
-    color: #ffffffde;
+    color: #6B7280;
     font-size: small;
     border: none;
 }
@@ -307,14 +308,14 @@
     border: 1px solid black;
     width: 26%;
     height: 100%;
-    color: white;
+    color: #6B7280;
     border: none;
 }
 .system_data_type{
     border: 1px solid black;
     width: 25%;
     height: 100%;
-    color: white;
+    color: #6B7280;
     border: none;
 }
 form input[type = submit]{

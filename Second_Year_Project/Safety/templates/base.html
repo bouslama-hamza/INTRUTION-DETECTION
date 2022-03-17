@@ -57,7 +57,11 @@
                     <img src="{% static 'IMAGES/design.png' %}">
                 </div>
                 <div class="app_header_setting">
-                    <img style="width: 24px; height: 24px;" src="{% static 'IMAGES/notification.png' %}">
+                    {% if isintrue %}
+                        <a href="{% url 'safety-new-intrue' %}"><img style="width: 28px; height: 28px;" src="{% static 'IMAGES/red_notification.png' %}"></a>
+                    {% else %}
+                        <a href="{% url 'safety-new-intrue' %}"><img style="width: 24px; height: 24px;" src="{% static 'IMAGES/notification.png' %}"></a>
+                    {% endif %}
                     <img style="width: 24px; height: 24px;" src="{% static 'IMAGES/settings.png' %}">
                     <img style="cursor: pointer;" onclick="show_bar()" src="{% static 'IMAGES/account.png' %}">
                 </div>

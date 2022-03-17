@@ -28,33 +28,38 @@ class SimpleImage():
         self.email    = 'Ham.bousa98@gmail.com'
         self.password = 'badBOY@2002'
         self.user     = self.auth.sign_in_with_email_and_password(self.email , self.password)
-        self.parse    = json.loads(requests.get(self.storage.get_url(self.user['idToken'])).text)
         self.cred     = credentials.Certificate('Safety/static/JS/first-project-db261-firebase-adminsdk-cfpjd-9e7480d0c5.json')
+        self.admin    = firebase_admin.initialize_app(self.cred , {'storageBucket': "first-project-db261.appspot.com"})
+        self.bucket   = admin_storage.bucket()
 
     def upload_image(self , path , target):
         self.storage.child(path+"/"+target.split("/")[3]).upload(target)
 
     def get_image(self , order):
+        storage  = self.firebase.storage()
+        parse    = json.loads(requests.get(storage.get_url(self.user['idToken'])).text)
         lest = []
-        for i in self.parse['items'] :
+        for i in parse['items'] :
             if i['name'].split("/")[0] == order[0]+" "+order[1]:
                 test_url = 'https://firebasestorage.googleapis.com/v0/b/first-project-db261.appspot.com/o/'+order[0]+'%20'+order[1]+'%2F'+i['name'].split("/")[1]+'?alt=media'
                 image_raw = get(test_url)
-                image = Image.open(BytesIO(image_raw.content))
-                width , height = image.size
-                lest.append({'name' : i['name'].split("/")[1] , 'url' : test_url , 'size' : [width , height]})
+                if image_raw:
+                    image = Image.open(BytesIO(image_raw.content))
+                    width , height = image.size
+                    lest.append({'name' : i['name'].split("/")[1] , 'url' : test_url , 'size' : [width , height]})
         return lest
 
-    def get_data_file(self , bucket):
-        for i in self.parse['items'] :
+    def get_data_file(self):
+        storage  = self.firebase.storage()
+        parse    = json.loads(requests.get(storage.get_url(self.user['idToken'])).text)
+        for i in parse['items'] :
             if i['name'].split("/")[0] == 'Data File':
                 self.storage.child(i['name']).download(filename = 'Safety/static/DATA/'+i['name'].split("/")[1], token = os.path.basename('Safety/static/DATA/'+i['name'].split("/")[1]))
-                blob = bucket.blob('Data File/'+i['name'].split("/")[1])
+                blob = self.bucket.blob('Data File/'+i['name'].split("/")[1])
                 blob.delete()
 
-    def download_image(self,image,bucket):
-        for i in self.parse['items'] :
-            if i['name'].split("/")[0] == 'New Detection':
-                self.storage.child('New Detection/'+image).download(filename = 'Safety/static/TRANFER/'+image, token = os.path.basename('Safety/static/TRANFER/'+image))
-                blob = bucket.blob('New Detection/'+image)
-                blob.delete()
+    def download_image(self,image):
+        storage  = self.firebase.storage()
+        storage.child('New Detection/'+image).download(filename = 'Safety/static/TRANFER/'+image, token = os.path.basename('Safety/static/TRANFER/'+image))
+        blob = self.bucket.blob('New Detection/'+image)
+        blob.delete()
