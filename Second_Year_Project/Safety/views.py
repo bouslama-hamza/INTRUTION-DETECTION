@@ -6,15 +6,12 @@ from Safety.send_email import send_email
 from django.contrib.auth.models import User
 from Safety.make_plot_data import make_data , make_pie , make_plot
 from Safety.load_data import load_data
-from django.http import JsonResponse
 import os
 
 # use our fire base class
 global simple
 simple = SimpleImage()
 global data_set
-global change_number
-global user
 global isintrue
 
 @login_required
@@ -122,6 +119,8 @@ def manage_account(request):
     return render(request, 'manage_account.html' , {'title' : 'Manage Account' , 'update_form':update_form , 'isintrue' : isintrue} )
     
 def reset_password(request):
+    global change_number
+    global user
     if request.method == 'POST':
         email = request.POST.get('change_me')
         try :
