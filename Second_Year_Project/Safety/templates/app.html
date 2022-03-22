@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="dashboard_page">
     <div class="dashboard_title">
         Dashboard
@@ -10,6 +11,14 @@
     {% endif %}
     <div class="dash_board_data">
         {% if data %}
+        <script>
+            var date = '{{ test.date }}';
+            var students = '{{ test.students }}';
+            var intrusion = '{{ test.intrusion }}';
+
+            var pie_students = '{{pie.students}}'
+            var pie_intrusion = '{{pie.intrusion}}'
+        </script>
         <div class="data_total">
             <div class="data_total_info">
                 <div class="data_total_value">TOTAL PERSON DETECTED</div>
@@ -41,12 +50,17 @@
         {% endif %}
     </div>
     <div class="dashboard_graph">
-        <div class="plot_graph">
-            <img src="{% static 'EXCEL/plot.png' %}">
-        </div>
-        <div class="pie_graph">
-            <img src="{% static 'EXCEL/pie.png' %}">
-        </div>
+        {% if test %}
+            <div class="plot_graph">
+                <canvas style="margin-top : 15px;margin-left: 10px; margin-right: 10px;" id="myChart" width="380" height="230"></canvas>
+            </div>
+        {% endif %}
+        {% if pie %}
+            <div class="pie_graph">
+                <canvas style="margin-top : 10px" id="mypie" width="380" height="220"></canvas>
+            </div>
+        {% endif %}
     </div>
 </div>
+<script src="{% static 'JS/chart.js' %}"></script>
 {% endblock content%}

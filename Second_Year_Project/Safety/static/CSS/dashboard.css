@@ -75,6 +75,9 @@
     width: 35%;
     height: 80%;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .pie_graph img{
     width: 410px;

@@ -6,6 +6,7 @@ from Safety.send_email import send_email
 from django.contrib.auth.models import User
 from Safety.make_plot_data import make_data , make_pie , make_plot
 from Safety.load_data import load_data
+from django.http import JsonResponse
 import os
 
 # use our fire base class
@@ -28,10 +29,10 @@ def app(request):
         load_data()
     except:
         print("no Data")
-    make_pie()
-    make_plot()
+    pie = make_pie()
+    test = make_plot()
     data_set = make_data()
-    return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'isintrue' : isintrue})
+    return render(request , 'app.html' , {'title' : 'DashBoard' , 'data' : data_set , 'test' : test, 'pie' : pie,'isintrue' : isintrue})
 
 @login_required
 def compenents(request):
