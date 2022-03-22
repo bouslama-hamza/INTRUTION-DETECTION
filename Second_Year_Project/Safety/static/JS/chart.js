@@ -25,7 +25,6 @@ const myChart = new Chart(ctx, {
             backgroundColor: 'skyblue',
             borderColor: 'skyblue',
             borderWidth: 1
-
         },{
             label: 'Intrusion Detection',
             data: intrusion,
@@ -42,7 +41,7 @@ const mypie = new Chart(pie, {
     data : {
         labels: ['Students','Intrusion'],
         datasets: [{
-          label: 'My First Dataset',
+          label: 'Intrusion Detection',
           data: [pie_students , pie_intrusion],
           backgroundColor: ['skyblue' , 'lightcoral'],
           hoverOffset: 4
