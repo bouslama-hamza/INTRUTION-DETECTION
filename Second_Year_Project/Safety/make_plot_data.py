@@ -25,5 +25,5 @@ def make_data():
     data['students'] = df['Students Detection'][len(df['Students Detection'])-1]
     data['intrusion']= df['Intrusion Detection'][len(df['Students Detection'])-1]
     data['total']    = data['students'] + data['intrusion']
-    data['avreage']  = format((data['students'] / data['total'])*100,".2f")
+    data['avreage']  = format((data['intrusion'] / data['total'])*100,".2f")
     return data
